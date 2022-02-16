@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Discgolfapp_v1">
         <activity
+            android:name=".DisplayMessageActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
