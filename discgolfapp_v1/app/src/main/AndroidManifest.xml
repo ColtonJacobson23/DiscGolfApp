@@ -10,6 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Discgolfapp_v1">
         <activity
+            android:name=".FormAnalyzerActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Form Analyzer"
+            android:exported="false" />
+        <activity
+            android:name=".DiscTracerActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Disc Tracer"
+            android:exported="false" />
+        <activity
+            android:name=".DiscFinderActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Disc Finder"
+            android:exported="false" />
+        <activity
+            android:name=".ScoreKeeperActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Score Keeper"
+            android:exported="false" />
+        <activity
+            android:name=".InventoryActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Inventory"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
