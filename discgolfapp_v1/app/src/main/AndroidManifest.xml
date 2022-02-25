@@ -10,31 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Discgolfapp_v1">
         <activity
-            android:name=".FormAnalyzerActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Form Analyzer"
-            android:exported="false" />
-        <activity
-            android:name=".DiscTracerActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Disc Tracer"
-            android:exported="false" />
-        <activity
-            android:name=".DiscFinderActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Disc Finder"
-            android:exported="false" />
-        <activity
-            android:name=".ScoreKeeperActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Score Keeper"
-            android:exported="false" />
-        <activity
-            android:name=".InventoryActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Inventory"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -43,6 +18,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".InventoryActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/inventory_name"
+            android:exported="false" />
+        <activity
+            android:name=".ScoreKeeperActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/score_keeper_name"
+            android:exported="false" />
+        <activity
+            android:name=".DiscFinderActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/disc_finder_name"
+            android:exported="false" />
+        <activity
+            android:name=".DiscTracerActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/disc_tracer_name"
+            android:exported="false" />
+        <activity
+            android:name=".FormAnalyzerActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/form_analyzer_name"
+            android:exported="false" />
     </application>
 
 </manifest>

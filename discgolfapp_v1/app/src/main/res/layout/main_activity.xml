@@ -8,60 +8,60 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/discFinderButton"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:onClick="startDiscFinderActivity"
-        android:text="Disc Finder"
+        android:text="@string/disc_finder_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreKeeperButton" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/inventoryButton"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:onClick="startInventoryActivity"
-        android:text="Inventory"
+        android:text="@string/inventory_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/scoreKeeperButton"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:onClick="startScoreKeeperActivity"
-        android:text="Score Keeper"
+        android:text="@string/score_keeper_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/inventoryButton" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/discTracerButton"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:onClick="startDiscTracerActivity"
-        android:text="Disc Tracer"
+        android:text="@string/disc_tracer_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/discFinderButton" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/formAnalyzerButton"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:onClick="startFormAnalyzerActivity"
-        android:text="Form Analyzer"
+        android:text="@string/form_analyzer_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/discTracerButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
