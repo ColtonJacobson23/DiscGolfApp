@@ -1,6 +1,8 @@
 package com.example.discgolfapp_v1
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
 import android.widget.Toast
@@ -12,6 +14,7 @@ class InventoryActivity : AppCompatActivity() {
     private var expandableListView: ExpandableListView? = null
     private var adapter: ExpandableListAdapter? = null
     private var titleList: List<String>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventory)
@@ -38,5 +41,10 @@ class InventoryActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+
+    fun startAddDiscActivity(view: View) {
+        val intent = Intent(this, AddDiscActivity::class.java)
+        startActivity(intent)
     }
 }

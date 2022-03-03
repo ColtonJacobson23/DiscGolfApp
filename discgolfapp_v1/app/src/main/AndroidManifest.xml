@@ -20,29 +20,34 @@
         </activity>
         <activity
             android:name=".InventoryActivity"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:label="@string/inventory_name"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ScoreKeeperActivity"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:label="@string/score_keeper_name"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DiscFinderActivity"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:label="@string/disc_finder_name"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DiscTracerActivity"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:label="@string/disc_tracer_name"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".FormAnalyzerActivity"
-            android:parentActivityName=".MainActivity"
+            android:exported="false"
             android:label="@string/form_analyzer_name"
-            android:exported="false" />
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AddDiscActivity"
+            android:exported="false"
+            android:label="@string/add_disc_name"
+            android:parentActivityName=".InventoryActivity" />
     </application>
 
 </manifest>

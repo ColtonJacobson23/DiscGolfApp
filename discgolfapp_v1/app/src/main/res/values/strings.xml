@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Disc Snap</string>
+
     <string name="inventory_name">Inventory</string>
     <string name="score_keeper_name">Score Keeper</string>
     <string name="disc_finder_name">Disc Finder</string>
     <string name="disc_tracer_name">Disc Tracer</string>
     <string name="form_analyzer_name">Form Analyzer</string>
+    <string name="add_disc_name">Add Disc</string>
+
+    <string name="add_disc_action">Add Disc</string>
 </resources>

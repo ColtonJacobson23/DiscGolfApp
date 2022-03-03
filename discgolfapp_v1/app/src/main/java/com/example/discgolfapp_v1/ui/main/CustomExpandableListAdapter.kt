@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import com.example.discgolfapp_v1.R
-import java.util.HashMap
+import java.util.*
 
 class CustomExpandableListAdapter internal constructor(
     private val context: Context,
     private val titleList: List<String>,
-    private val dataList: HashMap<String, List<String>>
+    private val dataList: TreeMap<String, List<String>>
 ) : BaseExpandableListAdapter() {
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
         return this.dataList[this.titleList[listPosition]]!![expandedListPosition]
@@ -35,8 +35,11 @@ class CustomExpandableListAdapter internal constructor(
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.list_item, null)
         }
+
+        // Set disc info
         val expandedListTextView = convertView!!.findViewById<TextView>(R.id.listView)
         expandedListTextView.text = expandedListText
+
         return convertView
     }
     override fun getChildrenCount(listPosition: Int): Int {
@@ -64,9 +67,11 @@ class CustomExpandableListAdapter internal constructor(
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.list_item, null)
         }
+
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.listView)
         listTitleTextView.setTypeface(null, Typeface.BOLD)
         listTitleTextView.text = listTitle
+
         return convertView
     }
     override fun hasStableIds(): Boolean {
