@@ -9,4 +9,21 @@
     <string name="add_disc_name">Add Disc</string>
 
     <string name="add_disc_action">Add Disc</string>
+
+    <string name="upload_photo_readable_text">Disc Photo</string>
+    <string name="upload_photo_button">Upload</string>
+    <string name="pick_disc_color_button">Change Color</string>
+    <string name="disc_color_prompt">Disc Color</string>
+    <string name="disc_name_prompt">Disc Name</string>
+    <string name="disc_type_prompt">Disc Type</string>
+
+    <string-array name="disc_types">
+        <item>Distance Driver</item>
+        <item>Fairway Driver</item>
+        <item>Midrange</item>
+        <item>Putter</item>
+    </string-array>
+
+    <string name="inner_disc_color">#D3D3D3</string>
+    <string name="outer_disc_color">#939393</string>
 </resources>

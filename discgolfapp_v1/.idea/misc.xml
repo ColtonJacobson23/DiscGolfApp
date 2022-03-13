@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/drawable/disc_preview.xml" value="0.2265" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
-        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_add_disc.xml" value="0.195382642154767" />
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_add_disc.xml" value="0.264" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_disc_finder.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_display_message.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_form_analyzer.xml" value="0.22509057971014493" />
