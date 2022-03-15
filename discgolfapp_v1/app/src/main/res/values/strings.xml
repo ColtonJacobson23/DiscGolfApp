@@ -8,7 +8,7 @@
     <string name="form_analyzer_name">Form Analyzer</string>
     <string name="add_disc_name">Add Disc</string>
 
-    <string name="add_disc_action">Add Disc</string>
+    <string name="add_disc_button">+</string>
 
     <string name="upload_photo_readable_text">Disc Photo</string>
     <string name="upload_photo_button">Upload</string>
