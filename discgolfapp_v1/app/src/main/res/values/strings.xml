@@ -15,7 +15,21 @@
     <string name="pick_disc_color_button">Change Color</string>
     <string name="disc_color_prompt">Disc Color</string>
     <string name="disc_name_prompt">Disc Name</string>
+    <string name="disc_name_hint">Disc Name</string>
+    <string name="disc_flight_numbers_prompt">Disc Flight Numbers</string>
+    <string name="disc_flight_speed_hint">Speed</string>
+    <string name="disc_flight_glide_hint">Glide</string>
+    <string name="disc_flight_turn_hint">Turn</string>
+    <string name="disc_flight_fade_hint">Fade</string>
     <string name="disc_type_prompt">Disc Type</string>
+    <string name="disc_weight_prompt">Disc Weight (g)</string>
+    <string name="disc_weight_hint">Disc Weight</string>
+    <string name="disc_manufacturer_prompt">Disc Manufacturer</string>
+    <string name="disc_manufacturer_hint">Disc Manufacturer</string>
+    <string name="disc_plastic_prompt">Disc Plastic</string>
+    <string name="disc_plastic_hint">Disc Plastic</string>
+    <string name="disc_additional_notes_prompt">Additional Notes</string>
+    <string name="disc_additional_notes_hint">Additional Notes</string>
 
     <string-array name="disc_types">
         <item>Distance Driver</item>

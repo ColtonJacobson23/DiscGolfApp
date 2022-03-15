@@ -6,127 +6,327 @@
     android:layout_height="match_parent"
     tools:context=".AddDiscActivity">
 
-    <Button
-        android:id="@+id/change_disc_color_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/pick_disc_color_button"
-        app:layout_constraintEnd_toEndOf="@+id/disc_color_preview"
-        app:layout_constraintStart_toStartOf="@+id/disc_color_preview"
-        app:layout_constraintTop_toBottomOf="@+id/disc_color_preview" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/disc_name_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/disc_name_prompt"
-        android:inputType="textPersonName"
-        android:textColorHint="#78909C"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disc_name_prompt"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-    <!--
-    <View
-        android:id="@+id/view"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/disc_preview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
--->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
-    <ImageButton
-        android:id="@+id/disc_image"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="#AAAAAA"
-        android:contentDescription="@string/upload_photo_readable_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+            <ImageButton
+                android:id="@+id/disc_image"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#AAAAAA"
+                android:contentDescription="@string/upload_photo_readable_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
 
-    <Spinner
-        android:id="@+id/disc_type_input"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="12dp"
-        android:entries="@array/disc_types"
-        android:requiresFadingEdge="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disc_type_prompt" />
+            <Button
+                android:id="@+id/upload_disc_photo_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#88DDDDDD"
+                android:insetBottom="0dp"
+                android:text="@string/upload_photo_button"
+                android:textColor="#000000"
+                app:cornerRadius="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/disc_image"
+                app:layout_constraintEnd_toEndOf="@+id/disc_image"
+                app:layout_constraintStart_toStartOf="@+id/disc_image" />
 
-    <TextView
-        android:id="@+id/disc_name_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/disc_name_prompt"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disc_image" />
+            <TextView
+                android:id="@+id/disc_color_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/disc_color_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/disc_color_preview"
+                app:layout_constraintEnd_toEndOf="@+id/disc_color_preview"
+                app:layout_constraintStart_toStartOf="@+id/disc_color_preview" />
 
-    <TextView
-        android:id="@+id/disc_type_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/disc_type_prompt"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disc_name_input" />
+            <View
+                android:id="@+id/disc_color_preview"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="#DD2727"
+                app:layout_constraintBottom_toBottomOf="@+id/disc_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/disc_image"
+                app:layout_constraintTop_toTopOf="@+id/disc_image" />
 
-    <TextView
-        android:id="@+id/disc_color_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/disc_color_prompt"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/disc_color_preview"
-        app:layout_constraintEnd_toEndOf="@+id/disc_color_preview"
-        app:layout_constraintStart_toStartOf="@+id/disc_color_preview" />
+            <Button
+                android:id="@+id/change_disc_color_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/pick_disc_color_button"
+                app:layout_constraintEnd_toEndOf="@+id/disc_color_preview"
+                app:layout_constraintStart_toStartOf="@+id/disc_color_preview"
+                app:layout_constraintTop_toBottomOf="@+id/disc_color_preview" />
 
-    <View
-        android:id="@+id/disc_color_preview"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="#DD2727"
-        app:layout_constraintBottom_toBottomOf="@+id/disc_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/disc_image"
-        app:layout_constraintTop_toTopOf="@+id/disc_image" />
+            <TextView
+                android:id="@+id/disc_name_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_name_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_image" />
 
-    <Button
-        android:id="@+id/upload_disc_photo_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#88DDDDDD"
-        android:insetBottom="0dp"
-        android:text="@string/upload_photo_button"
-        android:textColor="#000000"
-        app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/disc_image"
-        app:layout_constraintEnd_toEndOf="@+id/disc_image"
-        app:layout_constraintStart_toStartOf="@+id/disc_image" />
+            <EditText
+                android:id="@+id/disc_name_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/disc_name_prompt"
+                android:inputType="textPersonName"
+                android:nextFocusDown="@+id/disc_speed_input"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_name_prompt"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/disc_flight_numbers_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_flight_numbers_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_name_input" />
+
+            <EditText
+                android:id="@+id/disc_speed_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ems="10"
+                android:hint="@string/disc_flight_speed_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:nextFocusDown="@+id/disc_glide_input"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/disc_glide_input"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_flight_numbers_prompt" />
+
+            <EditText
+                android:id="@+id/disc_glide_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/disc_flight_glide_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:nextFocusDown="@+id/disc_turn_input"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/disc_turn_input"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/disc_speed_input"
+                app:layout_constraintTop_toBottomOf="@+id/disc_flight_numbers_prompt" />
+
+            <EditText
+                android:id="@+id/disc_turn_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/disc_flight_turn_hint"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:nextFocusDown="@+id/disc_fade_input"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/disc_fade_input"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/disc_glide_input"
+                app:layout_constraintTop_toBottomOf="@+id/disc_flight_numbers_prompt" />
+
+            <EditText
+                android:id="@+id/disc_fade_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/disc_flight_fade_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:nextFocusDown="@+id/disc_type_input"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/disc_turn_input"
+                app:layout_constraintTop_toBottomOf="@+id/disc_flight_numbers_prompt" />
+
+            <TextView
+                android:id="@+id/disc_type_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_type_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_speed_input" />
+
+            <Spinner
+                android:id="@+id/disc_type_input"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:entries="@array/disc_types"
+                android:requiresFadingEdge="horizontal|vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_type_prompt" />
+
+            <TextView
+                android:id="@+id/disc_weight_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_weight_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_type_input" />
+
+            <EditText
+                android:id="@+id/disc_weight_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ems="10"
+                android:hint="@string/disc_weight_hint"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_weight_prompt" />
+
+            <TextView
+                android:id="@+id/disc_manufacturer_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_manufacturer_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_weight_input" />
+
+            <EditText
+                android:id="@+id/disc_manufacturer_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/disc_manufacturer_hint"
+                android:inputType="textPersonName"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_manufacturer_prompt"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/disc_plastic_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_plastic_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_manufacturer_input" />
+
+            <EditText
+                android:id="@+id/disc_plastic_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/disc_plastic_hint"
+                android:inputType="textPersonName"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_plastic_prompt"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/disc_additional_notes_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/disc_additional_notes_prompt"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_plastic_input" />
+
+            <EditText
+                android:id="@+id/disc_additional_notes_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/disc_additional_notes_hint"
+                android:inputType="textMultiLine"
+                android:textColorHint="#78909C"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_additional_notes_prompt"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
