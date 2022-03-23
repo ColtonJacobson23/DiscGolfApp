@@ -8,6 +8,7 @@
     tools:context=".AddDiscActivity">
 
     <ScrollView
+        android:id="@+id/disc_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

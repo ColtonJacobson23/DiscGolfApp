@@ -6,9 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnFocusChangeListener
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.discgolfapp_v1.ui.main.DiscInfo
 import com.example.discgolfapp_v1.ui.main.VirtualBagData
@@ -99,6 +97,12 @@ class AddDiscActivity : AppCompatActivity() {
 
     fun saveDisc(view: View) {
         val nameEditText = findViewById<EditText>(R.id.disc_name_input)
+
+        if (nameEditText.text.toString() == "") {
+            warnRequiredFields()
+            return
+        }
+
         val colorView = findViewById<View>(R.id.disc_color_preview)
         val speedEditText = findViewById<EditText>(R.id.disc_speed_input)
         val glideEditText = findViewById<EditText>(R.id.disc_glide_input)
@@ -158,5 +162,19 @@ class AddDiscActivity : AppCompatActivity() {
 
         val intent = Intent(this, InventoryActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun warnRequiredFields() {
+        val namePrompt = findViewById<TextView>(R.id.disc_name_prompt)
+        val nameEditText = findViewById<EditText>(R.id.disc_name_input)
+        val scrollView = findViewById<ScrollView>(R.id.disc_scroll)
+
+        scrollView.scrollTo(0, namePrompt.top)
+        nameEditText.requestFocus()
+        Toast.makeText(
+            applicationContext,
+            "Name field required",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }
