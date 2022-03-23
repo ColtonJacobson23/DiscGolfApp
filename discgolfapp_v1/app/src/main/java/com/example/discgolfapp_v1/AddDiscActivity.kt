@@ -1,11 +1,17 @@
 package com.example.discgolfapp_v1
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.discgolfapp_v1.ui.main.DiscInfo
+import com.example.discgolfapp_v1.ui.main.VirtualBagData
 
 
 class AddDiscActivity : AppCompatActivity() {
@@ -13,22 +19,33 @@ class AddDiscActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_disc)
 
-        val discSpeedInput = findViewById<EditText>(R.id.disc_speed_input)
-        discSpeedInput.onFocusChangeListener = discSpeedFocusChangeListener
+        val speedEditText = findViewById<EditText>(R.id.disc_speed_input)
+        speedEditText.onFocusChangeListener = discSpeedFocusChangeListener
     }
-
+/*
+    private val nameEditText = findViewById<EditText>(R.id.disc_name_input)
+    private val colorView = findViewById<View>(R.id.disc_color_preview)
+    private val speedEditText = findViewById<EditText>(R.id.disc_speed_input)
+    private val glideEditText = findViewById<EditText>(R.id.disc_glide_input)
+    private val turnEditText = findViewById<EditText>(R.id.disc_turn_input)
+    private val fadeEditText = findViewById<EditText>(R.id.disc_fade_input)
+    private val typeSpinner = findViewById<Spinner>(R.id.disc_type_input)
+    private val weightEditText = findViewById<EditText>(R.id.disc_weight_input)
+    private val manufacturerEditText = findViewById<EditText>(R.id.disc_manufacturer_input)
+    private val plasticEditText = findViewById<EditText>(R.id.disc_plastic_input)
+    private val notesEditText = findViewById<EditText>(R.id.disc_additional_notes_input)
+*/
     private val discSpeedFocusChangeListener =
         OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 val discSpeedInputText = (view as EditText).text.toString()
+                val typeSpinner = findViewById<Spinner>(R.id.disc_type_input)
 
                 if (discSpeedInputText != "") {
-                    val discTypeDropdown = findViewById<Spinner>(R.id.disc_type_input)
-
                     when (discSpeedInputText.toInt()) {
                         9, 10, 11, 12, 13, 14 -> {
-                            if (discTypeDropdown.selectedItemPosition != 0) {
-                                discTypeDropdown.setSelection(0)
+                            if (typeSpinner.selectedItemPosition != 0) {
+                                typeSpinner.setSelection(0)
                                 Toast.makeText(
                                     applicationContext,
                                     "Disc Type changed to 'Distance Driver'",
@@ -37,8 +54,8 @@ class AddDiscActivity : AppCompatActivity() {
                             }
                         }
                         6, 7, 8 -> {
-                            if (discTypeDropdown.selectedItemPosition != 1) {
-                                discTypeDropdown.setSelection(1)
+                            if (typeSpinner.selectedItemPosition != 1) {
+                                typeSpinner.setSelection(1)
                                 Toast.makeText(
                                     applicationContext,
                                     "Disc Type changed to 'Fairway Driver'",
@@ -47,8 +64,8 @@ class AddDiscActivity : AppCompatActivity() {
                             }
                         }
                         4, 5 -> {
-                            if (discTypeDropdown.selectedItemPosition != 2) {
-                                discTypeDropdown.setSelection(2)
+                            if (typeSpinner.selectedItemPosition != 2) {
+                                typeSpinner.setSelection(2)
                                 Toast.makeText(
                                     applicationContext,
                                     "Disc Type changed to 'Midrange'",
@@ -57,8 +74,8 @@ class AddDiscActivity : AppCompatActivity() {
                             }
                         }
                         1, 2, 3 -> {
-                            if (discTypeDropdown.selectedItemPosition != 3) {
-                                discTypeDropdown.setSelection(3)
+                            if (typeSpinner.selectedItemPosition != 3) {
+                                typeSpinner.setSelection(3)
                                 Toast.makeText(
                                     applicationContext,
                                     "Disc Type changed to 'Putter'",
@@ -70,4 +87,76 @@ class AddDiscActivity : AppCompatActivity() {
                 }
             }
         }
+
+    private var colorIndex = 0
+    private val colors = intArrayOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.CYAN)
+
+    fun changeDiscColor(view: View) {
+        val colorView = findViewById<View>(R.id.disc_color_preview)
+        colorIndex = (colorIndex + 1) % 5
+        colorView.setBackgroundColor(colors[colorIndex])
+    }
+
+    fun saveDisc(view: View) {
+        val nameEditText = findViewById<EditText>(R.id.disc_name_input)
+        val colorView = findViewById<View>(R.id.disc_color_preview)
+        val speedEditText = findViewById<EditText>(R.id.disc_speed_input)
+        val glideEditText = findViewById<EditText>(R.id.disc_glide_input)
+        val turnEditText = findViewById<EditText>(R.id.disc_turn_input)
+        val fadeEditText = findViewById<EditText>(R.id.disc_fade_input)
+        val typeSpinner = findViewById<Spinner>(R.id.disc_type_input)
+        val weightEditText = findViewById<EditText>(R.id.disc_weight_input)
+        val manufacturerEditText = findViewById<EditText>(R.id.disc_manufacturer_input)
+        val plasticEditText = findViewById<EditText>(R.id.disc_plastic_input)
+        val notesEditText = findViewById<EditText>(R.id.disc_additional_notes_input)
+
+        val flightNums = Array<Int?>(4) {null}
+        var noFlightNum = true
+
+        if (speedEditText.text.toString() != "") {
+            flightNums[0] = speedEditText.text.toString().toInt()
+            noFlightNum = false
+        }
+        if (glideEditText.text.toString() != "") {
+            flightNums[1] = glideEditText.text.toString().toInt()
+            noFlightNum = false
+        }
+        if (turnEditText.text.toString() != "") {
+            flightNums[2] = turnEditText.text.toString().toInt()
+            noFlightNum = false
+        }
+        if (fadeEditText.text.toString() != "") {
+            flightNums[3] = fadeEditText.text.toString().toInt()
+            noFlightNum = false
+        }
+
+        val discInfo = DiscInfo(nameEditText.text.toString(),
+                                (colorView.background as ColorDrawable).color,
+                                typeSpinner.selectedItemPosition,
+                                null, // Add image file
+                                if (noFlightNum) null else flightNums,
+                                if (weightEditText.text.toString() == "") null else weightEditText.text.toString().toInt(),
+                                if (manufacturerEditText.text.toString() == "") null else manufacturerEditText.text.toString(),
+                                if (plasticEditText.text.toString() == "") null else plasticEditText.text.toString(),
+                                if (notesEditText.text.toString() == "") null else notesEditText.text.toString()
+            )
+
+        when (typeSpinner.selectedItemPosition) {
+            0 -> {
+                VirtualBagData.distanceDrivers.add(discInfo)
+            }
+            1 -> {
+                VirtualBagData.fairwayDrivers.add(discInfo)
+            }
+            2 -> {
+                VirtualBagData.midranges.add(discInfo)
+            }
+            3 -> {
+                VirtualBagData.putters.add(discInfo)
+            }
+        }
+
+        val intent = Intent(this, InventoryActivity::class.java)
+        startActivity(intent)
+    }
 }

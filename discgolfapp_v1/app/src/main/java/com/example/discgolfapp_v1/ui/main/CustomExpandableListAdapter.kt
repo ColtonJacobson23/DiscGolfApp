@@ -13,10 +13,10 @@ import java.util.*
 class CustomExpandableListAdapter internal constructor(
     private val context: Context,
     private val titleList: List<String>,
-    private val dataList: TreeMap<String, List<String>>
+    private val dataList: TreeMap<String, List<DiscInfo>>
 ) : BaseExpandableListAdapter() {
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
-        return this.dataList[this.titleList[listPosition]]!![expandedListPosition]
+        return this.dataList[this.titleList[listPosition]]!![expandedListPosition].getTextInfo()
     }
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
         return expandedListPosition.toLong()
@@ -39,6 +39,7 @@ class CustomExpandableListAdapter internal constructor(
         // Set disc info
         val expandedListTextView = convertView!!.findViewById<TextView>(R.id.listView)
         expandedListTextView.text = expandedListText
+        expandedListTextView.setBackgroundColor(this.dataList[this.titleList[listPosition]]!![expandedListPosition].discColor)
 
         return convertView
     }

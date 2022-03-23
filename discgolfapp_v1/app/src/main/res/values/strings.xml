@@ -1,35 +1,36 @@
 <resources>
     <string name="app_name">Disc Snap</string>
 
-    <string name="inventory_name">Inventory</string>
+    <string name="inventory_name">Virtual Bag</string>
     <string name="score_keeper_name">Score Keeper</string>
     <string name="disc_finder_name">Disc Finder</string>
     <string name="disc_tracer_name">Disc Tracer</string>
     <string name="form_analyzer_name">Form Analyzer</string>
-    <string name="add_disc_name">Add Disc</string>
+    <string name="disc_info_name">Disc Information</string>
 
     <string name="add_disc_button">+</string>
 
     <string name="upload_photo_readable_text">Disc Photo</string>
     <string name="upload_photo_button">Upload</string>
     <string name="pick_disc_color_button">Change Color</string>
-    <string name="disc_color_prompt">Disc Color</string>
-    <string name="disc_name_prompt">Disc Name</string>
-    <string name="disc_name_hint">Disc Name</string>
-    <string name="disc_flight_numbers_prompt">Disc Flight Numbers</string>
+    <string name="disc_color_prompt">Color</string>
+    <string name="disc_name_prompt">Name</string>
+    <string name="disc_name_hint">Name</string>
+    <string name="disc_flight_numbers_prompt">Flight Numbers</string>
     <string name="disc_flight_speed_hint">Speed</string>
     <string name="disc_flight_glide_hint">Glide</string>
     <string name="disc_flight_turn_hint">Turn</string>
     <string name="disc_flight_fade_hint">Fade</string>
-    <string name="disc_type_prompt">Disc Type</string>
-    <string name="disc_weight_prompt">Disc Weight (g)</string>
-    <string name="disc_weight_hint">Disc Weight</string>
-    <string name="disc_manufacturer_prompt">Disc Manufacturer</string>
-    <string name="disc_manufacturer_hint">Disc Manufacturer</string>
-    <string name="disc_plastic_prompt">Disc Plastic</string>
-    <string name="disc_plastic_hint">Disc Plastic</string>
+    <string name="disc_type_prompt">Type</string>
+    <string name="disc_weight_prompt">Weight (g)</string>
+    <string name="disc_weight_hint">Weight</string>
+    <string name="disc_manufacturer_prompt">Manufacturer</string>
+    <string name="disc_manufacturer_hint">Manufacturer</string>
+    <string name="disc_plastic_prompt">Plastic</string>
+    <string name="disc_plastic_hint">Plastic</string>
     <string name="disc_additional_notes_prompt">Additional Notes</string>
     <string name="disc_additional_notes_hint">Additional Notes</string>
+    <string name="save_disc_button">Save Disc</string>
 
     <string-array name="disc_types">
         <item>Distance Driver</item>

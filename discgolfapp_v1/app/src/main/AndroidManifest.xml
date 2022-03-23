@@ -46,7 +46,7 @@
         <activity
             android:name=".AddDiscActivity"
             android:exported="false"
-            android:label="@string/add_disc_name"
+            android:label="@string/disc_info_name"
             android:parentActivityName=".InventoryActivity" />
     </application>
 

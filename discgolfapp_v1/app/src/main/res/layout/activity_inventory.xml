@@ -9,12 +9,11 @@
 
     <ExpandableListView
         android:id="@+id/virtualBagList"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="11dp"
         android:divider="@android:color/background_light"
         android:dividerHeight="0.5dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_disc_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

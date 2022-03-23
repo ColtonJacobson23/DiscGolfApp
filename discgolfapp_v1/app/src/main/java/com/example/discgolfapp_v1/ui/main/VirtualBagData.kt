@@ -3,43 +3,9 @@ package com.example.discgolfapp_v1.ui.main
 import java.util.*
 
 internal object VirtualBagData {
-    val data: TreeMap<String, List<String>>
+    val data: TreeMap<String, List<DiscInfo>>
         get() {
-            val expandableListDetail = TreeMap<String, List<String>>()
-
-            val distanceDrivers: MutableList<String> = ArrayList()
-            val fairwayDrivers: MutableList<String> = ArrayList()
-            val midranges: MutableList<String> = ArrayList()
-            val putters: MutableList<String> = ArrayList()
-
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
-            distanceDrivers.add("Thunderbird")
-            fairwayDrivers.add("Leopard3")
-            midranges.add("Buzzz")
-            putters.add("Link")
+            val expandableListDetail = TreeMap<String, List<DiscInfo>>()
 
             expandableListDetail["Distance Drivers"] = distanceDrivers
             expandableListDetail["Fairway Drivers"] = fairwayDrivers
@@ -48,4 +14,8 @@ internal object VirtualBagData {
 
             return expandableListDetail
         }
+    val distanceDrivers: MutableList<DiscInfo> = ArrayList()
+    val fairwayDrivers: MutableList<DiscInfo> = ArrayList()
+    val midranges: MutableList<DiscInfo> = ArrayList()
+    val putters: MutableList<DiscInfo> = ArrayList()
 }

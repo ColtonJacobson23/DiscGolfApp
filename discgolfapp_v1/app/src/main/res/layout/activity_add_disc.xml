@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".AddDiscActivity">
 
     <ScrollView
@@ -58,7 +59,7 @@
                 android:id="@+id/disc_color_preview"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="#DD2727"
+                android:background="#FF0000"
                 app:layout_constraintBottom_toBottomOf="@+id/disc_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/disc_image"
@@ -69,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:onClick="changeDiscColor"
                 android:text="@string/pick_disc_color_button"
                 app:layout_constraintEnd_toEndOf="@+id/disc_color_preview"
                 app:layout_constraintStart_toStartOf="@+id/disc_color_preview"
@@ -325,6 +327,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/disc_additional_notes_prompt"
                 tools:ignore="DuplicateSpeakableTextCheck" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveDisc"
+                android:text="@string/save_disc_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/disc_additional_notes_input" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

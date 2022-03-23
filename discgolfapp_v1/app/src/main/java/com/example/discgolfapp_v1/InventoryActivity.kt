@@ -33,9 +33,7 @@ class InventoryActivity : AppCompatActivity() {
                             titleList as
                                     ArrayList<String>
                             )
-                            [groupPosition]]!!.get(
-                        childPosition
-                    ),
+                            [groupPosition]]!![childPosition].name,
                     Toast.LENGTH_SHORT
                 ).show()
                 false
