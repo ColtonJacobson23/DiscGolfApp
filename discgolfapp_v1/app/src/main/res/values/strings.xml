@@ -2,7 +2,7 @@
     <string name="app_name">Disc Snap</string>
 
     <string name="inventory_name">Virtual Bag</string>
-    <string name="score_keeper_name">Score Keeper</string>
+    <string name="practice_range_name">Practice Range</string>
     <string name="disc_finder_name">Disc Finder</string>
     <string name="disc_tracer_name">Disc Tracer</string>
     <string name="form_analyzer_name">Form Analyzer</string>

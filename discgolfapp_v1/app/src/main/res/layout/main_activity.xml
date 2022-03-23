@@ -14,19 +14,19 @@
         android:layout_height="100dp"
         android:onClick="startInventoryActivity"
         android:text="@string/inventory_name"
-        app:layout_constraintBottom_toTopOf="@+id/score_keeper_button"
+        app:layout_constraintBottom_toTopOf="@+id/practice_range_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/score_keeper_button"
+        android:id="@+id/practice_range_button"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:fontFamily="sans-serif-medium"
-        android:onClick="startScoreKeeperActivity"
-        android:text="@string/score_keeper_name"
+        android:onClick="startPracticeRangeActivity"
+        android:text="@string/practice_range_name"
         app:layout_constraintBottom_toTopOf="@+id/disc_finder_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score_keeper_button" />
+        app:layout_constraintTop_toBottomOf="@+id/practice_range_button" />
 
     <Button
         android:id="@+id/disc_tracer_button"

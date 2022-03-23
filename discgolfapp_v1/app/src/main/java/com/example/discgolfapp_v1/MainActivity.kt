@@ -4,18 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.discgolfapp_v1.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        //if (savedInstanceState == null) {
-        //    supportFragmentManager.beginTransaction()
-        //            .replace(R.id.container, MainFragment.newInstance())
-        //            .commitNow()
-        //}
     }
 
     fun startInventoryActivity(view: View) {
@@ -23,8 +17,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun startScoreKeeperActivity(view: View) {
-        val intent = Intent(this, ScoreKeeperActivity::class.java)
+    fun startPracticeRangeActivity(view: View) {
+        val intent = Intent(this, PracticeRangeActivity::class.java)
         startActivity(intent)
     }
 

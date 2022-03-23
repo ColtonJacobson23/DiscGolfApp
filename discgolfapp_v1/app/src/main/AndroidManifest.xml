@@ -24,9 +24,9 @@
             android:label="@string/inventory_name"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ScoreKeeperActivity"
+            android:name=".PracticeRangeActivity"
             android:exported="false"
-            android:label="@string/score_keeper_name"
+            android:label="@string/practice_range_name"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DiscFinderActivity"
