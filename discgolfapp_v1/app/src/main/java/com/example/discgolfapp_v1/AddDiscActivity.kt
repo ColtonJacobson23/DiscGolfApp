@@ -1,5 +1,6 @@
 package com.example.discgolfapp_v1
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -134,7 +135,25 @@ class AddDiscActivity : AppCompatActivity() {
             noFlightNum = false
         }
 
-        val discInfo = DiscInfo(nameEditText.text.toString(),
+        var discId: Int = 0
+
+        when (typeSpinner.selectedItemPosition) {
+            0 -> {
+                discId = VirtualBagData.distanceDrivers.size
+            }
+            1 -> {
+                discId = 1000 + VirtualBagData.fairwayDrivers.size
+            }
+            2 -> {
+                discId = 2000 + VirtualBagData.midranges.size
+            }
+            3 -> {
+                discId = 3000 + VirtualBagData.putters.size
+            }
+        }
+
+        val discInfo = DiscInfo(discId,
+                                nameEditText.text.toString(),
                                 (colorView.background as ColorDrawable).color,
                                 typeSpinner.selectedItemPosition,
                                 null, // Add image file
@@ -160,8 +179,10 @@ class AddDiscActivity : AppCompatActivity() {
             }
         }
 
-        val intent = Intent(this, InventoryActivity::class.java)
-        startActivity(intent)
+        val intent = Intent()
+        intent.putExtra("discId", discId)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun warnRequiredFields() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Disc Snap</string>
+    <string name="app_name">Disc Snap!</string>
 
     <string name="inventory_name">Virtual Bag</string>
     <string name="practice_range_name">Practice Range</string>
@@ -39,6 +39,31 @@
         <item>Putter</item>
     </string-array>
 
-    <string name="inner_disc_color">#D3D3D3</string>
-    <string name="outer_disc_color">#939393</string>
+    <string name="distance_label">Distance of Throw</string>
+    <string name="distance_display_default">-- ft</string>
+    <string name="distance_display_start">0 ft</string>
+    <string name="set_start_location_button">Set Start Location</string>
+    <string name="unset_start_location_button">Unset Start Location</string>
+    <string name="save_distance_button">Save Throw</string>
+
+    <string name="save_throw_title">Save Throw</string>
+    <string name="throw_notes_hint">Notes</string>
+    <string name="save_throw_button">Save</string>
+    <string name="save_throw_dismiss_button">x</string>
+
+    <string-array name="default_disc_select">
+        <item>SELECT DISC</item>
+        <item>NEW DISC</item>
+    </string-array>
+
+    <string-array name="throw_types">
+        <item>Backhand</item>
+        <item>Forehand</item>
+        <item>Overhand</item>
+    </string-array>
+
+    <string-array name="throw_flights">
+        <item>Air shot</item>
+        <item>Roller</item>
+    </string-array>
 </resources>

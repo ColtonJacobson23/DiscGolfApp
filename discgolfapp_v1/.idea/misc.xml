@@ -10,6 +10,7 @@
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_display_message.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_form_analyzer.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_inventory.xml" value="0.21128062875635692" />
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_practice_range.xml" value="0.195382642154767" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/activity_score_keeper.xml" value="0.195382642154767" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/content_display_message.xml" value="0.176" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/group_item.xml" value="0.2" />
@@ -17,6 +18,9 @@
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/list_item.xml" value="0.195382642154767" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/main_activity.xml" value="0.2" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/main_fragment.xml" value="0.195382642154767" />
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/popup_save_throw.xml" value="0.2" />
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/spinner_disc_select.xml" value="0.1" />
+        <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/layout/throw_list_item.xml" value="0.195382642154767" />
         <entry key="..\:/Users/hoe00/CapstoneApp/DiscGolfApp/discgolfapp_v1/app/src/main/res/menu/add_disc.xml" value="0.195382642154767" />
       </map>
     </option>
