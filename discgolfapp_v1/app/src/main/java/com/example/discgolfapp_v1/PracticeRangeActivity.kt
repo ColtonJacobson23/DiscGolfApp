@@ -27,7 +27,7 @@ import com.example.discgolfapp_v1.ui.main.ThrowListAdapter
 import kotlin.math.*
 import com.example.discgolfapp_v1.ui.main.VirtualBagData
 
-class PracticeRangeActivity : AppCompatActivity(), LocationListener {
+class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow.OnDismissListener {
     private lateinit var locationManager: LocationManager
     private lateinit var saveThrowView: View
     private lateinit var popupWindow: PopupWindow
@@ -163,6 +163,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener {
 
     fun saveThrow(view: View) {
         if (currentDist != null) {
+            locationManager.removeUpdates(this)
             popupSaveThrow()
         } else {
             Toast.makeText(this, "Start Location Not Set", Toast.LENGTH_SHORT).show()
@@ -188,6 +189,17 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener {
                 Toast.makeText(this, "Location Permission Denied", Toast.LENGTH_SHORT).show()
                 finish()
             }
+        }
+    }
+
+    override fun onDismiss() {
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                1000,
+                1f,
+                this
+            )
         }
     }
 
@@ -217,6 +229,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener {
         )
 
         popupWindow.isFocusable = true
+        popupWindow.setOnDismissListener(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.elevation = 10.0f
