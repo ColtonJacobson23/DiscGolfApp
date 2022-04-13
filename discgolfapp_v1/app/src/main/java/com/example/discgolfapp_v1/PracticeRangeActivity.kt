@@ -26,6 +26,7 @@ import com.example.discgolfapp_v1.ui.main.ThrowInfo
 import com.example.discgolfapp_v1.ui.main.ThrowListAdapter
 import kotlin.math.*
 import com.example.discgolfapp_v1.ui.main.VirtualBagData
+import java.lang.Exception
 
 class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow.OnDismissListener {
     private lateinit var locationManager: LocationManager
@@ -126,6 +127,17 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
 
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isFinishing) {
+            try {
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                locationManager.removeUpdates(this)
+            }
+            catch (e: Exception) {}
         }
     }
 
