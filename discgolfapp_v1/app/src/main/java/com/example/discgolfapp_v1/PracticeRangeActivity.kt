@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.discgolfapp_v1.ui.main.DiscInfo
 import com.example.discgolfapp_v1.ui.main.ThrowInfo
 import com.example.discgolfapp_v1.ui.main.ThrowListAdapter
 import kotlin.math.*
@@ -275,7 +274,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
             when (discSpinner.selectedItemPosition) {
                 0 -> Toast.makeText(applicationContext, "Please Select A Disc", Toast.LENGTH_SHORT).show()
                 1 -> getNewDisc.launch(Intent(this, AddDiscActivity::class.java))
-                2 -> {
+                else -> {
                     val discId = discIds[discSpinner.selectedItemPosition - 2]
                     val discDisplayName = discNames[discSpinner.selectedItemPosition - 2]
                     val throwType = resources.getStringArray(R.array.throw_types)[throwTypeSpinner.selectedItemPosition]
@@ -311,10 +310,10 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
 
         TransitionManager.beginDelayedTransition(rootLayout)
         popupWindow.showAtLocation(
-            rootLayout, // Location to display popup window
-            Gravity.CENTER, // Exact position of layout to display popup
-            0, // X offset
-            0 // Y offset
+            rootLayout,
+            Gravity.CENTER,
+            0,
+            0
         )
     }
 }

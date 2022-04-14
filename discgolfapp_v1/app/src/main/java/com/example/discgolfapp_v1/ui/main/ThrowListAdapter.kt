@@ -4,15 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
+import android.widget.*
 import com.example.discgolfapp_v1.R
-
 
 class ThrowListAdapter(context: Context, throws: ArrayList<ThrowInfo>) :
     ArrayAdapter<ThrowInfo>(context, 0, throws) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val throwItem = getItem(position)
         var view = convertView
+
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.throw_list_item, parent, false)
         }
@@ -21,7 +21,6 @@ class ThrowListAdapter(context: Context, throws: ArrayList<ThrowInfo>) :
         val throwTypeTextView = view.findViewById<TextView>(R.id.throw_type)
         val notesTextView = view.findViewById<TextView>(R.id.throw_notes)
         val throwDistTextView = view.findViewById<TextView>(R.id.throw_distance)
-        val throwItem = getItem(position)
 
         discTextView.text = throwItem!!.discDisplayName
         throwTypeTextView.text = throwItem.type
