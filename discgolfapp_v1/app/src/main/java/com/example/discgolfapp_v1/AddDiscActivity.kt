@@ -5,18 +5,29 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.UserHandle
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.discgolfapp_v1.data.Disc
+import com.example.discgolfapp_v1.data.DiscViewModel
 import com.example.discgolfapp_v1.ui.main.DiscInfo
 import com.example.discgolfapp_v1.ui.main.VirtualBagData
+import java.sql.Blob
 
 
 class AddDiscActivity : AppCompatActivity() {
+
+    private lateinit var mDiscViewModel: DiscViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_disc)
+        mDiscViewModel = ViewModelProvider(this).get(DiscViewModel::class.java)
 
         val speedEditText = findViewById<EditText>(R.id.disc_speed_input)
         speedEditText.onFocusChangeListener = discSpeedFocusChangeListener
@@ -179,11 +190,88 @@ class AddDiscActivity : AppCompatActivity() {
             }
         }
 
+        //Creates a new disc in the db
+        insertDataToDatabase(
+            discInfo.name,
+            discInfo.imageFile,
+            discInfo.discColor,
+            discInfo.flightNums!![0],
+            discInfo.flightNums!![1],
+            discInfo.flightNums!![2],
+            discInfo.flightNums!![3],
+            discInfo.type,
+            discInfo.weight,
+            discInfo.manufacturer,
+            discInfo.plastic,
+            discInfo.notes
+        )
+
         val intent = Intent()
         intent.putExtra("discId", discId)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
+
+    private fun insertDataToDatabase(
+        name: String?,
+        photo: String?,
+        color: Int,
+        speed: Int?,
+        glide: Int?,
+        turn: Int?,
+        fade: Int?,
+        type: Int,
+        weight: Int?,
+        manufacturer: String?,
+        plastic: String?,
+        notes: String?
+        ) {
+        if (
+            inputCheck(name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
+            &&
+            duplicateCheck()
+        )
+        {
+            val disc = Disc(0, name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
+            mDiscViewModel.addDisc(disc)
+        }
+
+    }
+
+    private fun duplicateCheck(): Boolean {
+        return true
+    }
+
+    private fun inputCheck(
+        name: String?,
+        photo: String?,
+        color: Int,
+        speed: Int?,
+        glide: Int?,
+        turn: Int?,
+        fade: Int?,
+        type: Int,
+        weight: Int?,
+        manufacturer: String?,
+        plastic: String?,
+        notes: String?
+    ): Boolean {
+        return (
+            name!!.isNotEmpty() &&
+            photo!!.isNotEmpty() &&
+            color != null &&
+            speed != null &&
+            glide != null &&
+            turn != null &&
+            fade != null &&
+            type != null &&
+            weight != null &&
+            manufacturer!!.isNotEmpty() &&
+            plastic!!.isNotEmpty() &&
+            notes!!.isNotEmpty()
+            )
+    }
+
 
     private fun warnRequiredFields() {
         val namePrompt = findViewById<TextView>(R.id.disc_name_prompt)
