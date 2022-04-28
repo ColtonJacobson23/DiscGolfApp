@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.discgolfapp_v1.data.DiscViewModel
 import com.example.discgolfapp_v1.ui.main.ThrowInfo
 import com.example.discgolfapp_v1.ui.main.ThrowListAdapter
 import kotlin.math.*
@@ -28,6 +30,7 @@ import com.example.discgolfapp_v1.ui.main.VirtualBagData
 import java.lang.Exception
 
 class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow.OnDismissListener {
+    private lateinit var mDiscViewModel: DiscViewModel
     private lateinit var locationManager: LocationManager
     private lateinit var saveThrowView: View
     private lateinit var popupWindow: PopupWindow
@@ -39,19 +42,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
         get() {
             val discs = ArrayList<Int>()
 
-            for (d in VirtualBagData.distanceDrivers) {
-                discs.add(d.id)
-            }
-
-            for (d in VirtualBagData.fairwayDrivers) {
-                discs.add(d.id)
-            }
-
-            for (d in VirtualBagData.midranges) {
-                discs.add(d.id)
-            }
-
-            for (d in VirtualBagData.putters) {
+            for (d in mDiscViewModel.readAllData.value!!) {
                 discs.add(d.id)
             }
 
@@ -61,20 +52,13 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
         get() {
             val discs = ArrayList<String>()
 
-            for (d in VirtualBagData.distanceDrivers) {
-                discs.add("${d.name} (DD)")
-            }
-
-            for (d in VirtualBagData.fairwayDrivers) {
-                discs.add("${d.name} (FD)")
-            }
-
-            for (d in VirtualBagData.midranges) {
-                discs.add("${d.name} (M)")
-            }
-
-            for (d in VirtualBagData.putters) {
-                discs.add("${d.name} (P)")
+            for (d in mDiscViewModel.readAllData.value!!) {
+                when (d.type) {
+                    0 -> discs.add("${d.name} (DD)")
+                    1 -> discs.add("${d.name} (FD)")
+                    2 -> discs.add("${d.name} (M)")
+                    3 -> discs.add("${d.name} (P)")
+                }
             }
 
             return discs
@@ -119,6 +103,8 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_practice_range)
+
+        mDiscViewModel = ViewModelProvider(this).get(DiscViewModel::class.java)
 
         val throwListView = findViewById<ListView>(R.id.throw_list)
         val throwAdapter = ThrowListAdapter(this, throws)
@@ -273,7 +259,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
 
             when (discSpinner.selectedItemPosition) {
                 0 -> Toast.makeText(applicationContext, "Please Select A Disc", Toast.LENGTH_SHORT).show()
-                1 -> getNewDisc.launch(Intent(this, AddDiscActivity::class.java))
+                1 -> startActivity(Intent(this, AddDiscActivity::class.java))
                 else -> {
                     val discId = discIds[discSpinner.selectedItemPosition - 2]
                     val discDisplayName = discNames[discSpinner.selectedItemPosition - 2]

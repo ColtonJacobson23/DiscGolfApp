@@ -146,59 +146,26 @@ class AddDiscActivity : AppCompatActivity() {
             noFlightNum = false
         }
 
-        var discId: Int = 0
-
-        when (typeSpinner.selectedItemPosition) {
-            0 -> {
-                discId = VirtualBagData.distanceDrivers.size
-            }
-            1 -> {
-                discId = 1000 + VirtualBagData.fairwayDrivers.size
-            }
-            2 -> {
-                discId = 2000 + VirtualBagData.midranges.size
-            }
-            3 -> {
-                discId = 3000 + VirtualBagData.putters.size
-            }
-        }
-
-        val discInfo = DiscInfo(discId,
-                                nameEditText.text.toString(),
-                                (colorView.background as ColorDrawable).color,
-                                typeSpinner.selectedItemPosition,
-                                null, // Add image file
-                                if (noFlightNum) null else flightNums,
-                                if (weightEditText.text.toString() == "") null else weightEditText.text.toString().toInt(),
-                                if (manufacturerEditText.text.toString() == "") null else manufacturerEditText.text.toString(),
-                                if (plasticEditText.text.toString() == "") null else plasticEditText.text.toString(),
-                                if (notesEditText.text.toString() == "") null else notesEditText.text.toString()
-            )
-
-        when (typeSpinner.selectedItemPosition) {
-            0 -> {
-                VirtualBagData.distanceDrivers.add(discInfo)
-            }
-            1 -> {
-                VirtualBagData.fairwayDrivers.add(discInfo)
-            }
-            2 -> {
-                VirtualBagData.midranges.add(discInfo)
-            }
-            3 -> {
-                VirtualBagData.putters.add(discInfo)
-            }
-        }
+        val discInfo = DiscInfo(nameEditText.text.toString(),
+            (colorView.background as ColorDrawable).color,
+            typeSpinner.selectedItemPosition,
+            null, // Add image file
+            if (noFlightNum) null else flightNums,
+            if (weightEditText.text.toString() == "") null else weightEditText.text.toString().toInt(),
+            if (manufacturerEditText.text.toString() == "") null else manufacturerEditText.text.toString(),
+            if (plasticEditText.text.toString() == "") null else plasticEditText.text.toString(),
+            if (notesEditText.text.toString() == "") null else notesEditText.text.toString()
+        )
 
         //Creates a new disc in the db
         insertDataToDatabase(
             discInfo.name,
             discInfo.imageFile,
             discInfo.discColor,
-            discInfo.flightNums!![0],
-            discInfo.flightNums!![1],
-            discInfo.flightNums!![2],
-            discInfo.flightNums!![3],
+            discInfo.flightNums?.get(0),
+            discInfo.flightNums?.get(1),
+            discInfo.flightNums?.get(2),
+            discInfo.flightNums?.get(3),
             discInfo.type,
             discInfo.weight,
             discInfo.manufacturer,
@@ -206,14 +173,11 @@ class AddDiscActivity : AppCompatActivity() {
             discInfo.notes
         )
 
-        val intent = Intent()
-        intent.putExtra("discId", discId)
-        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 
     private fun insertDataToDatabase(
-        name: String?,
+        name: String,
         photo: String?,
         color: Int,
         speed: Int?,
@@ -226,20 +190,15 @@ class AddDiscActivity : AppCompatActivity() {
         plastic: String?,
         notes: String?
         ) {
-        if (
-            inputCheck(name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
-            &&
-            duplicateCheck()
-        )
-        {
+        if (duplicateCheck(name, color, type)) {
             val disc = Disc(0, name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
             mDiscViewModel.addDisc(disc)
         }
-
     }
 
-    private fun duplicateCheck(): Boolean {
-        return true
+    private fun duplicateCheck(name: String, color: Int, type: Int): Boolean {
+        val discs = mDiscViewModel.findDisc(name, color, type).value
+        return discs == null || discs.isEmpty()
     }
 
     private fun inputCheck(

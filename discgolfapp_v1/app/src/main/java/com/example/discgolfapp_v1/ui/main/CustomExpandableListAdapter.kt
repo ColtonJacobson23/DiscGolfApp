@@ -8,15 +8,46 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import com.example.discgolfapp_v1.R
+import com.example.discgolfapp_v1.data.Disc
 import java.util.*
 
 class CustomExpandableListAdapter internal constructor(
     private val context: Context,
     private val titleList: List<String>,
-    private val dataList: TreeMap<String, List<DiscInfo>>
+    private val dataList: TreeMap<String, List<Disc>>
 ) : BaseExpandableListAdapter() {
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
-        return this.dataList[this.titleList[listPosition]]!![expandedListPosition].getTextInfo()
+        val disc = this.dataList[this.titleList[listPosition]]!![expandedListPosition]
+        var info = disc.name + "\n"
+
+        if (disc.fnspeed != null) {
+            info += disc.fnspeed
+        } else {
+            info += "-"
+        }
+
+        info += " | "
+        if (disc.fnglide != null) {
+            info += disc.fnglide
+        } else {
+            info += "-"
+        }
+
+        info += " | "
+        if (disc.fnturn != null) {
+            info += disc.fnturn
+        } else {
+            info += "-"
+        }
+
+        info += " | "
+        if (disc.fnfade != null) {
+            info += disc.fnfade
+        } else {
+            info += "-"
+        }
+
+        return info
     }
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
         return expandedListPosition.toLong()
@@ -39,7 +70,7 @@ class CustomExpandableListAdapter internal constructor(
         // Set disc info
         val expandedListTextView = convertView!!.findViewById<TextView>(R.id.listView)
         expandedListTextView.text = expandedListText
-        expandedListTextView.setBackgroundColor(this.dataList[this.titleList[listPosition]]!![expandedListPosition].discColor)
+        expandedListTextView.setBackgroundColor(this.dataList[this.titleList[listPosition]]!![expandedListPosition].color)
 
         return convertView
     }

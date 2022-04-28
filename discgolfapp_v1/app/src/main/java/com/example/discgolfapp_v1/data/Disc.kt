@@ -4,12 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Blob
 
-@Entity
+@Entity ("disc_table")
 data class Disc (
     @PrimaryKey(autoGenerate=true)
     val id: Int,
 
-    val name: String?,
+    val name: String,
     val photo: String?,
     val color: Int,
     val fnspeed: Int?,

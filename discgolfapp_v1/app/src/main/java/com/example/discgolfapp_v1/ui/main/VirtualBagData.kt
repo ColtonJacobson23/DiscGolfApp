@@ -1,21 +1,20 @@
 package com.example.discgolfapp_v1.ui.main
 
+import com.example.discgolfapp_v1.data.Disc
+import com.example.discgolfapp_v1.data.DiscViewModel
 import java.util.*
 
-internal object VirtualBagData {
-    val data: TreeMap<String, List<DiscInfo>>
+class VirtualBagData (discViewModel: DiscViewModel) {
+    private val mDiscViewModel = discViewModel
+    val data: TreeMap<String, List<Disc>>
         get() {
-            val expandableListDetail = TreeMap<String, List<DiscInfo>>()
+            val expandableListDetail = TreeMap<String, List<Disc>>()
 
-            expandableListDetail["Distance Drivers"] = distanceDrivers
-            expandableListDetail["Fairway Drivers"] = fairwayDrivers
-            expandableListDetail["Mid-Ranges"] = midranges
-            expandableListDetail["Putters"] = putters
+            expandableListDetail["Distance Drivers"] = mDiscViewModel.distanceDrivers.value ?: ArrayList()
+            expandableListDetail["Fairway Drivers"] = mDiscViewModel.fairwayDrivers.value ?: ArrayList()
+            expandableListDetail["Mid-Ranges"] = mDiscViewModel.midranges.value ?: ArrayList()
+            expandableListDetail["Putters"] = mDiscViewModel.putters.value ?: ArrayList()
 
             return expandableListDetail
         }
-    val distanceDrivers: MutableList<DiscInfo> = ArrayList()
-    val fairwayDrivers: MutableList<DiscInfo> = ArrayList()
-    val midranges: MutableList<DiscInfo> = ArrayList()
-    val putters: MutableList<DiscInfo> = ArrayList()
 }

@@ -1,7 +1,6 @@
 package com.example.discgolfapp_v1.ui.main
 
-class DiscInfo(dId: Int,
-               dName: String,
+class DiscInfo(dName: String,
                dColor: Int,
                dType: Int,
                dImageFile: String? = null,
@@ -11,7 +10,6 @@ class DiscInfo(dId: Int,
                dPlastic: String? = null,
                dNotes: String? = null
 ) {
-    var id: Int = dId
     var name: String = dName
     var discColor: Int = dColor
     var type: Int = dType
