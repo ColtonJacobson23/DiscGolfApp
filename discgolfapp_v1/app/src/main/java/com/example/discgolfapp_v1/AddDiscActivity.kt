@@ -127,50 +127,34 @@ class AddDiscActivity : AppCompatActivity() {
         val notesEditText = findViewById<EditText>(R.id.disc_additional_notes_input)
 
         val flightNums = Array<Int?>(4) {null}
-        var noFlightNum = true
 
         if (speedEditText.text.toString() != "") {
             flightNums[0] = speedEditText.text.toString().toInt()
-            noFlightNum = false
         }
         if (glideEditText.text.toString() != "") {
             flightNums[1] = glideEditText.text.toString().toInt()
-            noFlightNum = false
         }
         if (turnEditText.text.toString() != "") {
             flightNums[2] = turnEditText.text.toString().toInt()
-            noFlightNum = false
         }
         if (fadeEditText.text.toString() != "") {
             flightNums[3] = fadeEditText.text.toString().toInt()
-            noFlightNum = false
         }
 
-        val discInfo = DiscInfo(nameEditText.text.toString(),
-            (colorView.background as ColorDrawable).color,
-            typeSpinner.selectedItemPosition,
+        //Creates a new disc in the db
+        insertDataToDatabase(
+            nameEditText.text.toString(),
             null, // Add image file
-            if (noFlightNum) null else flightNums,
+            (colorView.background as ColorDrawable).color,
+            flightNums[0],
+            flightNums[1],
+            flightNums[2],
+            flightNums[3],
+            typeSpinner.selectedItemPosition,
             if (weightEditText.text.toString() == "") null else weightEditText.text.toString().toInt(),
             if (manufacturerEditText.text.toString() == "") null else manufacturerEditText.text.toString(),
             if (plasticEditText.text.toString() == "") null else plasticEditText.text.toString(),
             if (notesEditText.text.toString() == "") null else notesEditText.text.toString()
-        )
-
-        //Creates a new disc in the db
-        insertDataToDatabase(
-            discInfo.name,
-            discInfo.imageFile,
-            discInfo.discColor,
-            discInfo.flightNums?.get(0),
-            discInfo.flightNums?.get(1),
-            discInfo.flightNums?.get(2),
-            discInfo.flightNums?.get(3),
-            discInfo.type,
-            discInfo.weight,
-            discInfo.manufacturer,
-            discInfo.plastic,
-            discInfo.notes
         )
 
         finish()
@@ -190,15 +174,12 @@ class AddDiscActivity : AppCompatActivity() {
         plastic: String?,
         notes: String?
         ) {
-        if (duplicateCheck(name, color, type)) {
-            val disc = Disc(0, name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
-            mDiscViewModel.addDisc(disc)
-        }
+        val disc = Disc(0, name, photo, color, speed, glide, turn, fade, type, weight, manufacturer, plastic, notes)
+        mDiscViewModel.addDisc(disc)
     }
 
     private fun duplicateCheck(name: String, color: Int, type: Int): Boolean {
-        val discs = mDiscViewModel.findDisc(name, color, type).value
-        return discs == null || discs.isEmpty()
+        return true
     }
 
     private fun inputCheck(

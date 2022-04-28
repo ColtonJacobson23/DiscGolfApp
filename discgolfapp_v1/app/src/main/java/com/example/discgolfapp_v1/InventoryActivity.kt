@@ -48,27 +48,6 @@ class InventoryActivity : AppCompatActivity() {
             }
         })
         virtualBagData = VirtualBagData(mDiscViewModel)
-
-        expandableListView = findViewById(R.id.virtualBagList)
-        if (expandableListView != null) {
-            val listData = virtualBagData.data
-            titleList = ArrayList(listData.keys)
-            adapter = CustomExpandableListAdapter(this, titleList as ArrayList<String>, listData)
-            expandableListView!!.setAdapter(adapter)
-
-            expandableListView!!.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-                Toast.makeText(
-                    applicationContext,
-                    "Clicked: " + (titleList as ArrayList<String>)[groupPosition] + " -> " + listData[(
-                            titleList as
-                                    ArrayList<String>
-                            )
-                            [groupPosition]]!![childPosition].name,
-                    Toast.LENGTH_SHORT
-                ).show()
-                false
-            }
-        }
     }
 
     fun startAddDiscActivity(view: View) {

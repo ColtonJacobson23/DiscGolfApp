@@ -9,10 +9,6 @@ import kotlinx.coroutines.launch
 
 class DiscViewModel (application: Application): AndroidViewModel(application) {
     val readAllData: LiveData<List<Disc>>
-    val distanceDrivers: LiveData<List<Disc>>
-    val fairwayDrivers: LiveData<List<Disc>>
-    val midranges: LiveData<List<Disc>>
-    val putters: LiveData<List<Disc>>
     private val repository: DiscRepository
 
 
@@ -21,10 +17,6 @@ class DiscViewModel (application: Application): AndroidViewModel(application) {
         val discDao = DiscDatabase.getDatabase(application).discDao()
         repository = DiscRepository(discDao)
         readAllData = repository.readALlData
-        distanceDrivers = repository.distanceDrivers
-        fairwayDrivers = repository.fairwayDrivers
-        midranges = repository.midranges
-        putters = repository.putters
     }
 
     fun addDisc (disc:Disc)
@@ -33,9 +25,5 @@ class DiscViewModel (application: Application): AndroidViewModel(application) {
         {
             repository.addDisc(disc)
         }
-    }
-
-    fun findDisc (name: String, color: Int, type: Int): LiveData<List<Disc>> {
-        return repository.findDisc(name, color, type)
     }
 }
