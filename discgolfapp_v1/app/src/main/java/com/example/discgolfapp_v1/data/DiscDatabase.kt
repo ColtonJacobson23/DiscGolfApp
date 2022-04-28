@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import java.security.AccessControlContext
 
-@Database(entities = [(Disc::class)], version = 1, exportSchema = false)
+@Database(entities = [(Disc::class), (Throw::class)], version = 1, exportSchema = false)
 abstract class DiscDatabase: RoomDatabase()
 {
     abstract fun discDao(): DiscDao
+    abstract fun throwDao(): ThrowDao
 
     companion object
     {

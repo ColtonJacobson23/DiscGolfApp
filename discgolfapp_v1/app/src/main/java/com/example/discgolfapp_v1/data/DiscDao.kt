@@ -12,7 +12,7 @@ interface DiscDao {
     @Insert
     suspend fun addDisc (disc: Disc)
 
-    @Query("SELECT * FROM disc_table ORDER BY fnspeed DESC, name ASC")
+    @Query("SELECT * FROM disc_table ORDER BY type ASC, fnspeed DESC, name ASC")
     fun readAllData(): LiveData<List<Disc>>
 
 }

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -21,8 +22,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.discgolfapp_v1.data.Disc
 import com.example.discgolfapp_v1.data.DiscViewModel
+import com.example.discgolfapp_v1.data.Throw
+import com.example.discgolfapp_v1.data.ThrowViewModel
 import com.example.discgolfapp_v1.ui.main.ThrowInfo
 import com.example.discgolfapp_v1.ui.main.ThrowListAdapter
 import kotlin.math.*
@@ -31,72 +36,17 @@ import java.lang.Exception
 
 class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow.OnDismissListener {
     private lateinit var mDiscViewModel: DiscViewModel
+    private lateinit var mThrowViewModel: ThrowViewModel
     private lateinit var locationManager: LocationManager
     private lateinit var saveThrowView: View
     private lateinit var popupWindow: PopupWindow
     private var startLocation: Location? = null
     private var currentDist: Int? = null
     private val locationPermissionCode = 2
+    private var popupInflated = false
     private val throws = ArrayList<ThrowInfo>()
-    private val discIds: ArrayList<Int>
-        get() {
-            val discs = ArrayList<Int>()
-
-            for (d in mDiscViewModel.readAllData.value!!) {
-                discs.add(d.id)
-            }
-
-            return discs
-        }
-    private val discNames: ArrayList<String>
-        get() {
-            val discs = ArrayList<String>()
-
-            for (d in mDiscViewModel.readAllData.value!!) {
-                when (d.type) {
-                    0 -> discs.add("${d.name} (DD)")
-                    1 -> discs.add("${d.name} (FD)")
-                    2 -> discs.add("${d.name} (M)")
-                    3 -> discs.add("${d.name} (P)")
-                }
-            }
-
-            return discs
-        }
-    private val getNewDisc = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val addNewDisc = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val discId = result.data?.getIntExtra("discId", -1)
-
-            val throwTypeSpinner = saveThrowView.findViewById<Spinner>(R.id.select_throw_type_spinner)
-            val throwFlightSpinner = saveThrowView.findViewById<Spinner>(R.id.select_throw_flight_spinner)
-            val notesEditText = saveThrowView.findViewById<EditText>(R.id.throw_notes_input)
-
-            var discDisplayName = ""
-            for (i in discIds.indices) {
-                if (discIds[i] == discId) {
-                    discDisplayName = discNames[i]
-                }
-            }
-
-            val throwType = resources.getStringArray(R.array.throw_types)[throwTypeSpinner.selectedItemPosition]
-            val throwFlight = resources.getStringArray(R.array.throw_flights)[throwFlightSpinner.selectedItemPosition]
-
-            val throwInfo = ThrowInfo(
-                discId!!,
-                discDisplayName,
-                throwType,
-                throwFlight,
-                if (notesEditText.text.toString() == "") null else notesEditText.text.toString(),
-                currentDist!!
-            )
-
-            throws.add(throwInfo)
-
-            val throwListView = findViewById<ListView>(R.id.throw_list)
-            val throwAdapter = ThrowListAdapter(this, throws)
-            throwListView.adapter = throwAdapter
-
-            popupWindow.dismiss()
         }
     }
 
@@ -105,10 +55,64 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
         setContentView(R.layout.activity_practice_range)
 
         mDiscViewModel = ViewModelProvider(this).get(DiscViewModel::class.java)
+        mDiscViewModel.readAllData.observe(this, Observer {
+            if (popupInflated) {
+                val throwTypeSpinner =
+                    saveThrowView.findViewById<Spinner>(R.id.select_throw_type_spinner)
+                val throwFlightSpinner =
+                    saveThrowView.findViewById<Spinner>(R.id.select_throw_flight_spinner)
+                val notesEditText = saveThrowView.findViewById<EditText>(R.id.throw_notes_input)
 
-        val throwListView = findViewById<ListView>(R.id.throw_list)
-        val throwAdapter = ThrowListAdapter(this, throws)
-        throwListView.adapter = throwAdapter
+                var discId = -1
+                var discDisplayName = ""
+                if (mDiscViewModel.readAllData.value != null) {
+                    for (d in mDiscViewModel.readAllData.value!!) {
+                        if (d.id > discId) {
+                            discId = d.id
+                            when (d.type) {
+                                0 -> discDisplayName = "${d.name} (DD)"
+                                1 -> discDisplayName = "${d.name} (FD)"
+                                2 -> discDisplayName = "${d.name} (M)"
+                                3 -> discDisplayName = "${d.name} (P)"
+                            }
+                        }
+                    }
+                }
+
+                val throwType =
+                    resources.getStringArray(R.array.throw_types)[throwTypeSpinner.selectedItemPosition]
+                val throwFlight =
+                    resources.getStringArray(R.array.throw_flights)[throwFlightSpinner.selectedItemPosition]
+
+                val throwInfo = ThrowInfo(
+                    discId,
+                    discDisplayName,
+                    throwType,
+                    throwFlight,
+                    if (notesEditText.text.toString() == "") null else notesEditText.text.toString(),
+                    currentDist!!
+                )
+
+                throws.add(throwInfo)
+                popupInflated = false
+
+                //Creates a new throw in the db
+                insertDataToDatabase(
+                    throwInfo.discId,
+                    throwInfo.type,
+                    throwInfo.flight,
+                    throwInfo.notes,
+                    throwInfo.distance
+                )
+
+                val throwListView = findViewById<ListView>(R.id.throw_list)
+                val throwAdapter = ThrowListAdapter(this, throws)
+                throwListView.adapter = throwAdapter
+
+                popupWindow.dismiss()
+            }
+        })
+        mThrowViewModel = ViewModelProvider(this).get(ThrowViewModel::class.java)
 
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
@@ -219,6 +223,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
     private fun popupSaveThrow() {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         saveThrowView = inflater.inflate(R.layout.popup_save_throw, null)
+        popupInflated = true
         popupWindow = PopupWindow(
             saveThrowView,
             ConstraintLayout.LayoutParams.WRAP_CONTENT,
@@ -242,6 +247,21 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
             popupWindow.exitTransition = slideOut
         }
 
+        val discIds = ArrayList<Int>()
+        val discNames = ArrayList<String>()
+
+        if (mDiscViewModel.readAllData.value != null) {
+            for (d in mDiscViewModel.readAllData.value!!) {
+                discIds.add(d.id)
+                when (d.type) {
+                    0 -> discNames.add("${d.name} (DD)")
+                    1 -> discNames.add("${d.name} (FD)")
+                    2 -> discNames.add("${d.name} (M)")
+                    3 -> discNames.add("${d.name} (P)")
+                }
+            }
+        }
+
         val discSpinner = saveThrowView.findViewById<Spinner>(R.id.select_disc_spinner)
         val arrayList = arrayListOf("SELECT DISC", "NEW DISC")
         arrayList += discNames
@@ -259,7 +279,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
 
             when (discSpinner.selectedItemPosition) {
                 0 -> Toast.makeText(applicationContext, "Please Select A Disc", Toast.LENGTH_SHORT).show()
-                1 -> startActivity(Intent(this, AddDiscActivity::class.java))
+                1 -> addNewDisc.launch(Intent(this, AddDiscActivity::class.java))
                 else -> {
                     val discId = discIds[discSpinner.selectedItemPosition - 2]
                     val discDisplayName = discNames[discSpinner.selectedItemPosition - 2]
@@ -276,6 +296,16 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
                     )
 
                     throws.add(throwInfo)
+                    popupInflated = false
+
+                    //Creates a new throw in the db
+                    insertDataToDatabase(
+                        throwInfo.discId,
+                        throwInfo.type,
+                        throwInfo.flight,
+                        throwInfo.notes,
+                        throwInfo.distance
+                    )
 
                     val throwListView = findViewById<ListView>(R.id.throw_list)
                     val throwAdapter = ThrowListAdapter(this, throws)
@@ -301,5 +331,16 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
             0,
             0
         )
+    }
+
+    private fun insertDataToDatabase(
+        discId: Int,
+        type: String,
+        flight: String,
+        notes: String?,
+        distance: Int
+    ) {
+        val discThrow = Throw(0, discId, type, flight, notes, distance)
+        mThrowViewModel.addThrow(discThrow)
     }
 }

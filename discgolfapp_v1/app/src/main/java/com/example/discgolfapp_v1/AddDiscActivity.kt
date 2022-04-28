@@ -157,6 +157,8 @@ class AddDiscActivity : AppCompatActivity() {
             if (notesEditText.text.toString() == "") null else notesEditText.text.toString()
         )
 
+        val intent = Intent()
+        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 
