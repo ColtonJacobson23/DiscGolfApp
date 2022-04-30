@@ -45,10 +45,6 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
     private val locationPermissionCode = 2
     private var popupInflated = false
     private val throws = ArrayList<ThrowInfo>()
-    private val addNewDisc = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -279,7 +275,7 @@ class PracticeRangeActivity : AppCompatActivity(), LocationListener, PopupWindow
 
             when (discSpinner.selectedItemPosition) {
                 0 -> Toast.makeText(applicationContext, "Please Select A Disc", Toast.LENGTH_SHORT).show()
-                1 -> addNewDisc.launch(Intent(this, AddDiscActivity::class.java))
+                1 -> startActivity(Intent(this, AddDiscActivity::class.java))
                 else -> {
                     val discId = discIds[discSpinner.selectedItemPosition - 2]
                     val discDisplayName = discNames[discSpinner.selectedItemPosition - 2]
